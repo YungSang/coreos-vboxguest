@@ -12,10 +12,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_version = "1.3.3"
 
   if ARGV[0] == "up" || ARGV[0] == "provision" then
-    config.vm.network :private_network, ip: "192.168.33.10"
-
-    config.vm.synced_folder ".", "/tmp/vagrant", id: "core", type: "nfs", mount_options: ["nolock", "vers=3", "udp"]
-
     config.vm.provision :docker do |d|
       d.pull_images "yungsang/coreos-vboxguest:3.17.2-4.3.18"
       d.run "yungsang/coreos-vboxguest:3.17.2-4.3.18", args: "--rm -v /usr/share/oem:/target",
@@ -26,7 +22,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       s.inline = <<-EOT
         sudo cp -R /usr/lib/modules/`uname -r`/* /usr/share/oem/lib/modules/`uname -r`/
         sudo depmod -b /usr/share/oem
-        sudo umount /tmp/vagrant 2> /dev/null || true
       EOT
     end
   end
