@@ -17,8 +17,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder ".", "/tmp/vagrant", id: "core", type: "nfs", mount_options: ["nolock", "vers=3", "udp"]
 
     config.vm.provision :docker do |d|
-      d.build_image "/tmp/vagrant/", args: "-t yungsang/vboxguest"
-      d.run "yungsang/vboxguest", args: "--rm -v /usr/share/oem:/target",
+      d.pull_images "yungsang/coreos-vboxguest:3.17.2-4.3.18"
+      d.run "yungsang/coreos-vboxguest:3.17.2-4.3.18", args: "--rm -v /usr/share/oem:/target",
         auto_assign_name: false, daemonize: false
     end
 
