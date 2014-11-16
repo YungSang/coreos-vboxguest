@@ -3,11 +3,11 @@ FROM fedora:latest
 RUN yum -y update && yum -y install git make gcc p7zip p7zip-plugins bzip2
 
 # CoreOS Linux Kernel
-ENV KERNEL_VERSION v3.17.2
+ENV KERNEL_VERSION 3.17.2
 RUN cd /usr/src && \
-    git clone --depth 1 --single-branch -b coreos/${KERNEL_VERSION} https://github.com/coreos/linux.git
+    git clone --depth 1 --single-branch -b coreos/v${KERNEL_VERSION} https://github.com/coreos/linux.git
 RUN cd /usr/src/linux && \
-    zcat /proc/config.gz > .config && \
+    curl -L -o .config https://raw.githubusercontent.com/coreos/coreos-overlay/master/sys-kernel/coreos-kernel/files/x86_64_defconfig-${KERNEL_VERSION} && \
     make prepare && make scripts
 
 # VirtualBox Guest Additions
