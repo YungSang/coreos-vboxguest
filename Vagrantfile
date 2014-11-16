@@ -26,7 +26,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       s.inline = <<-EOT
         sudo cp -R /usr/lib/modules/`uname -r`/* /usr/share/oem/lib/modules/`uname -r`/
         sudo depmod -b /usr/share/oem
-        sudo umount /tmp/vagrant || true
+        sudo umount /tmp/vagrant 2> /dev/null || true
       EOT
     end
   end
@@ -50,7 +50,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :shell, run: "always" do |s|
     s.inline = <<-EOT
-      sudo umount /home/core/vagrant || true
+      sudo umount /home/core/vagrant 2> /dev/null || true
       sudo mkdir -p /home/core/vagrant
       sudo /usr/share/oem/sbin/mount.vboxsf -o uid=`id -u core`,gid=`id -g core` coreos /home/core/vagrant
       EOT
