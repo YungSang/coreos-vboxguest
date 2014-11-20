@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "yungsang/coreos-alpha"
 
-  config.vm.box_version = "1.3.3"
+  config.vm.box_version = ">= 1.3.1, <= 1.4.0"
 
   if ARGV[0] == "up" || ARGV[0] == "provision" then
     config.vm.provision :docker do |d|

@@ -20,6 +20,6 @@ $ vagrant up
 
 ## Limitations
 
-Currently it supports [CoreOS 494.0.0](https://github.com/coreos/manifest/releases/tag/v494.0.0)
+Currently it supports CoreOS 490.0.0, 493.0.0, 494.0.0 and 505.1.0
   with [the latest CoreOS linux kernel 3.17.2](https://github.com/coreos/linux/tree/coreos/v3.17.2)
   and VirtualBox v4.3.18.
